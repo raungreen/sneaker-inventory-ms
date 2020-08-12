@@ -1,0 +1,91 @@
+@layout('layouts.admin')
+
+@section('breadcrumbs')
+<div class="breadcrumbs-area clearfix">
+  <h4 class="page-title pull-left">Products</h4>
+  <ul class="breadcrumbs pull-left">
+      <li><a href="/admin">Dashboard</a></li>
+      <li><a href="/admin/products">All Products</a></li>
+      <li><span>Create New Products</span></li>
+  </ul>
+</div>
+@endsection
+
+@section('content')
+<div class="row">
+    <div class="col-12 mt-5">
+        <div class="card">
+            <div class="card-body">
+                <form action="/admin/products" method="POST">
+                    {{ csrfField() }}
+                    <h4 class="header-title">Create Product</h4>
+                    <p class="text-muted font-14 mb-4">Create the details for new product.</p>
+                    <div class="form-group">
+                        <label for="example-text-input" class="col-form-label">Title</label>
+                        <input class="form-control" type="text" value="" name="title" >
+                    </div>
+                    <div class="form-group">
+                        <label for="example-text-input" class="col-form-label">Image URL</label>
+                        <input class="form-control" type="text" value="" name="img_url" >
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-4">
+                            <label for="example-text-input" class="col-form-label">SKU</label>
+                            <input class="form-control" type="text" value="" name="sku" >
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label for="example-text-input" class="col-form-label">Price</label>
+                            <input class="form-control" type="text" value="" name="price" >
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label for="example-text-input" class="col-form-label">Material</label>
+                            <input class="form-control" type="text" value="" name="material" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 col-md-4">
+                            <label for="example-text-input" class="col-form-label">Quantity</label>
+                            <input class="form-control" type="text" value="" name="qty" >
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label for="example-text-input" class="col-form-label">Size</label>
+                            <select class="custom-select" name="size">
+                                <option value="0" selected="selected">Choose Size</option>
+                                <option value="7">7</option>
+                                <option value="7.5">7.5</option>
+                                <option value="8">8</option>
+                                <option value="8.5">8.5</option>
+                                <option value="9">9</option>
+                                <option value="9.5">9.5</option>
+                                <option value="10">10</option>
+                                <option value="10.5">10.5</option>
+                                <option value="11">11</option>
+                                <option value="11.5">11.5</option>
+                                <option value="12">12</option>
+                            </select>
+                            
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label class="col-form-label">Brands</label>
+                            <select class="custom-select" name="brand_id">
+                                @each(brand in brands)
+                                <option value="{{brand.id}}"
+                                {{(brand.id == product.brand_id) ? 'selected="selected"' : ''}}
+                                    >{{brand.title}} </option>
+                                @endeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="example-text-input" class="col-form-label">Description</label>
+                        <textarea class="form-control" name="description" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Submit Product</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
